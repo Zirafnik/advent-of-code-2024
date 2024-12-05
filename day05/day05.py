@@ -34,6 +34,38 @@ def part1(data):
     return sumMedians
 
 
+def part2(data):
+    sumMedians = 0
+    [rules, lineIndex] = parseRules(data)
+
+    for i in range(lineIndex + 1, len(data)):
+        line = data[i]
+
+        pages = line.split(",")
+
+        j = 0
+        isIncorrect = False
+        while j < len(pages) - 1:
+            page = pages[j]
+            for k in range(j + 1, len(pages)):
+                afterPage = pages[k]
+                if afterPage in rules.get(page, {}):
+                    if k == len(pages) - 1:
+                        # only increase j (next page) when it completed with no swaps
+                        j += 1
+                        continue
+                else:
+                    isIncorrect = True
+                    temp = pages.pop(k)
+                    pages.insert(j, temp)
+                    break
+
+        if isIncorrect:
+            sumMedians += getMedian(pages)
+
+    return sumMedians
+
+
 def parseRules(data):
     rules = {}
 
@@ -53,4 +85,5 @@ def getMedian(list):
     return int(list[medianIdx])
 
 
-print(part1(file))
+print(part1(file))  # 4662
+print(part2(file))  # 5900
