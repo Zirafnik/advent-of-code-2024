@@ -19,6 +19,10 @@ def part1(data):
             newResult = numbers[0]
 
             for i in range(1, len(numbers)):
+                # If already over the target, break
+                if newResult > int(result):
+                    break
+
                 num = numbers[i]
                 operation = operations[i - 1]
 
@@ -39,7 +43,7 @@ def part2(data):
     # lineNum = 1  # Used only for progress indicator
     # totalLines = 850  # Used only for progress indicator
     for line in data:
-        # print(lineNum, totalLines, sep="/") # Used only for progress indicator
+        # print(lineNum, totalLines, sep="/")  # Used only for progress indicator
         [result, numStr] = line.split(": ")
         numbers = [int(num) for num in numStr.split(" ")]
 
@@ -51,6 +55,10 @@ def part2(data):
             newResult = numbers[0]
 
             for i in range(1, len(numbers)):
+                # If already over the target, break
+                if newResult > int(result):
+                    break
+
                 num = numbers[i]
                 operation = operations[i - 1]
 
@@ -64,7 +72,7 @@ def part2(data):
             if newResult == int(result):
                 total += int(result)
                 break
-        # lineNum += 1 # Used only for progress indicator
+        # lineNum += 1  # Used only for progress indicator
 
     return total
 
